@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol UserDelegate {
-	func userCreated(_ user: User)
-}
-
-class User {
+struct User {
 	let id: Int
 	let userName: String
 	let profilePictureURL: String
@@ -22,14 +18,6 @@ class User {
 	let mediaCount: Int
 	let followsCount: Int
 	let followedByCount: Int
-	
-	private var delegate: UserDelegate?
-	
-	convenience init(response: [String : Any], delegate: UserDelegate) {
-		self.init(response: response)
-		self.delegate = delegate
-		self.delegate?.userCreated(self)
-	}
 	
 	init(response: [String : Any]) {
 		id = Int(response["id"] as! String)!

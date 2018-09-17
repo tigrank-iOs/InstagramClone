@@ -12,6 +12,16 @@ class MainVC: UIViewController {
 	// MARK: - Outlets
 	@IBOutlet weak var userNameLabel: UILabel!
 	
+	// MARK: - Variables
+	var user: User? {
+		didSet {
+			guard user != nil else { return }
+			DispatchQueue.main.async {
+				self.userNameLabel.text = self.user?.userName
+			}
+		}
+	}
+	
 	// MARK: - VCLifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,20 +29,10 @@ class MainVC: UIViewController {
 		if let token = Credential.token {
 			APIManager.shared.load(Constants.API.host + Constants.API.body + Constants.API.token + token) { (json) in
 				if let result = (json as? [String : Any])?["data"] as? [String : Any] {
-					let _ = User(response: result, delegate: self)
+					let user = User(response: result)
+					self.user = user
 				}
 			}
 		}
     }
-}
-
-extension MainVC: UserDelegate {
-	// MARK: - UserDelegate
-	func userCreated(_ user: User) {
-		DispatchQueue.main.async {
-			self.userNameLabel.text = user.userName
-		}
-	}
-	
-	
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 public class Constants {
+	
 	private init() { }
 	
 	struct Auth {
