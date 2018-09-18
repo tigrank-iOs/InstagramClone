@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User {
+public struct User {
 	let id: Int
 	let userName: String
 	let profilePictureURL: String

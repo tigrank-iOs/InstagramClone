@@ -22,17 +22,60 @@ class MainVC: UIViewController {
 		}
 	}
 	
-	// MARK: - VCLifeCycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-		if let token = Credential.token {
-			APIManager.shared.load(Constants.API.host + Constants.API.body + Constants.API.token + token) { (json) in
-				if let result = (json as? [String : Any])?["data"] as? [String : Any] {
-					let user = User(response: result)
-					self.user = user
+	var tag: Tag? {
+		didSet {
+			guard tag != nil else { return }
+			APIManager.shared.getTagedMedia(for: tag!) { (media, error) in
+				if let media = media {
+					print("\n==========Media for tag \(self.tag!.name)==========")
+					print(media)
+				}
+				if !error.isEmpty {
+					print(error)
 				}
 			}
 		}
-    }
+	}
+	
+	// MARK: - VCLifeCycle
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		loadUser()
+		
+		APIManager.shared.getMedia { (media, error) in
+			if let media = media {
+				print("\n==========Media for user \(self.user!.userName)==========")
+				print(media)
+			}
+			if !error.isEmpty {
+				print(error)
+			}
+		}
+		
+		APIManager.shared.getTags(for: "happynewyear") { (tags, error) in
+			if let tags = tags {
+				self.tag = tags.first
+				
+				print("\n==========Tags for happynewyear==========")
+				for tag in tags {
+					print(tag.name)
+				}
+			}
+			if !error.isEmpty {
+				print(error)
+			}
+		}
+	}
+	
+	// MARK: - Functions
+	fileprivate func loadUser() {
+		APIManager.shared.getUser { (user, error) in
+			if let user = user {
+				self.user = user
+			}
+			if !error.isEmpty {
+				print(error)
+			}
+		}
+	}
 }
