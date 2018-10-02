@@ -99,7 +99,7 @@ public class APIManager {
 			completion(nil, errorMessage)
 			return
 		}
-		let url = Constants.MediaAPI.host + Constants.MediaAPI.body + Constants.MediaAPI.latitude + Constants.MediaAPI.longtitude + Constants.MediaAPI.token + token
+		let url = Constants.MediaAPI.host + Constants.MediaAPI.body + Constants.MediaAPI.latitude + lattitude + Constants.MediaAPI.longtitude + longtitude + Constants.MediaAPI.token + token
 		
 		self.load(url) { [weak self] (json, error) in
 			guard let strongSelf = self else { return }

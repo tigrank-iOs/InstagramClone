@@ -14,7 +14,7 @@ public enum MediaTypes {
 
 public protocol MediaProtocol {
 	var id: String { get }
-	var user: User { get }
+	var user: SenderMedia { get }
 	var images: [String : Photo]? { get }
 	var caption: Caption? { get }
 	var userHasLiked: Bool { get }
@@ -28,9 +28,9 @@ public protocol MediaProtocol {
 	var usersInPhoto: [[String? : Any?]] { get }
 }
 
-public struct Image: MediaProtocol {
+public class Image: MediaProtocol {
 	public var id: String
-	public var user: User
+	public var user: SenderMedia
 	public var images: [String : Photo]?
 	public var caption: Caption?
 	public var userHasLiked: Bool
@@ -45,7 +45,8 @@ public struct Image: MediaProtocol {
 	
 	init(response: [String : Any]) {
 		id = response["id"] as! String
-		user = User(response: response["user"] as! [String : Any])
+		let user = User(response: response["user"] as! [String : Any])
+		self.user = SenderMedia(user)
 		for data in response["images"] as! [String : Any] {
 			images?[data.key] = Photo(data: data.value as! [String : Any])
 		}
@@ -61,9 +62,9 @@ public struct Image: MediaProtocol {
 	}
 }
 
-public struct Video: MediaProtocol {
+public class Video: MediaProtocol {
 	public var id: String
-	public var user: User
+	public var user: SenderMedia
 	public var images: [String : Photo]?
 	public var caption: Caption?
 	public var userHasLiked: Bool
@@ -71,7 +72,7 @@ public struct Video: MediaProtocol {
 	public var tags: [String?]
 	public var filter: String
 	public var comments: Int
-	public var type: MediaTypes = .photo
+	public var type: MediaTypes = .video
 	public var link: String
 	public var location: [String : Any]?
 	public var usersInPhoto: [[String? : Any?]]
@@ -80,7 +81,8 @@ public struct Video: MediaProtocol {
 	
 	init(response: [String : Any]) {
 		id = response["id"] as! String
-		user = User(response: response["user"] as! [String : Any])
+		let user = User(response: response["user"] as! [String : Any])
+		self.user = SenderMedia(user)
 		for data in response["images"] as! [String : Any] {
 			images?[data.key] = Photo(data: data.value as! [String : Any])
 		}
@@ -100,7 +102,7 @@ public struct Video: MediaProtocol {
 	}
 }
 
-public struct Photo {
+public class Photo {
 	var width: Int
 	var height: Int
 	var url: String
@@ -112,7 +114,7 @@ public struct Photo {
 	}
 }
 
-public struct Caption {
+public class Caption {
 	var id: Int
 	var text: String
 	var user: User
@@ -124,7 +126,7 @@ public struct Caption {
 	}
 }
 
-public struct VideoModel {
+public class VideoModel {
 	var width: Int
 	var height: Int
 	var url: String

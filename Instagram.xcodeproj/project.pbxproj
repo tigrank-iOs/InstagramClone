@@ -20,6 +20,8 @@
 		C22BB399214A5B47008B98CD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB398214A5B47008B98CD /* APIManager.swift */; };
 		C22BB39B214A5C7E008B98CD /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB39A214A5C7E008B98CD /* MainVC.swift */; };
 		C22BB39D214A696C008B98CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB39C214A696C008B98CD /* Constants.swift */; };
+		C26EF065216361EA00323FBD /* SenderMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EF064216361EA00323FBD /* SenderMedia.swift */; };
+		C26EF0672163650000323FBD /* Date EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EF0662163650000323FBD /* Date EXT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		C22BB398214A5B47008B98CD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		C22BB39A214A5C7E008B98CD /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		C22BB39C214A696C008B98CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C26EF064216361EA00323FBD /* SenderMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderMedia.swift; sourceTree = "<group>"; };
+		C26EF0662163650000323FBD /* Date EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				C22BB38D214A4B32008B98CD /* Credential.swift */,
 				C22BB398214A5B47008B98CD /* APIManager.swift */,
 				C2299DB021511CC500AB6CB5 /* MediaFactory.swift */,
+				C26EF064216361EA00323FBD /* SenderMedia.swift */,
+				C26EF0662163650000323FBD /* Date EXT.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -184,8 +190,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C22BB397214A5988008B98CD /* User.swift in Sources */,
+				C26EF065216361EA00323FBD /* SenderMedia.swift in Sources */,
 				C22BB39B214A5C7E008B98CD /* MainVC.swift in Sources */,
 				C2299DB5215123BF00AB6CB5 /* Tag.swift in Sources */,
+				C26EF0672163650000323FBD /* Date EXT.swift in Sources */,
 				C22BB38E214A4B32008B98CD /* Credential.swift in Sources */,
 				C22BB399214A5B47008B98CD /* APIManager.swift in Sources */,
 				C2299DB121511CC500AB6CB5 /* MediaFactory.swift in Sources */,
