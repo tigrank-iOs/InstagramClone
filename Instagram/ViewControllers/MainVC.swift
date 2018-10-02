@@ -25,13 +25,10 @@ class MainVC: UIViewController {
 	var tag: Tag? {
 		didSet {
 			guard tag != nil else { return }
-			APIManager.shared.getTagedMedia(for: tag!) { (media, error) in
+			APIManager.shared.getMedia(for: tag!) { (media) in
 				if let media = media {
 					print("\n==========Media for tag \(self.tag!.name)==========")
 					print(media)
-				}
-				if !error.isEmpty {
-					print(error)
 				}
 			}
 		}
@@ -41,18 +38,14 @@ class MainVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadUser()
-		
-		APIManager.shared.getMedia { (media, error) in
+		APIManager.shared.getMedia { (media) in
 			if let media = media {
 				print("\n==========Media for user \(self.user!.userName)==========")
 				print(media)
 			}
-			if !error.isEmpty {
-				print(error)
-			}
 		}
 		
-		APIManager.shared.getTags(for: "happynewyear") { (tags, error) in
+		APIManager.shared.getTags(for: "happynewyear") { (tags) in
 			if let tags = tags {
 				self.tag = tags.first
 				
@@ -61,21 +54,15 @@ class MainVC: UIViewController {
 					print(tag.name)
 				}
 			}
-			if !error.isEmpty {
-				print(error)
-			}
 		}
 	}
 	
 	// MARK: - Functions
 	fileprivate func loadUser() {
-		APIManager.shared.getUser { (user, error) in
+		APIManager.shared.getUser({ (user) in
 			if let user = user {
 				self.user = user
 			}
-			if !error.isEmpty {
-				print(error)
-			}
-		}
+		})
 	}
 }

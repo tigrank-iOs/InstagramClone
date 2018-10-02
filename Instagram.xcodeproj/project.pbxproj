@@ -17,9 +17,11 @@
 		C22BB38E214A4B32008B98CD /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB38D214A4B32008B98CD /* Credential.swift */; };
 		C22BB392214A4C03008B98CD /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB391214A4C03008B98CD /* AuthorizationVC.swift */; };
 		C22BB397214A5988008B98CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB396214A5988008B98CD /* User.swift */; };
-		C22BB399214A5B47008B98CD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB398214A5B47008B98CD /* APIManager.swift */; };
+		C22BB399214A5B47008B98CD /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB398214A5B47008B98CD /* QueryService.swift */; };
 		C22BB39B214A5C7E008B98CD /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB39A214A5C7E008B98CD /* MainVC.swift */; };
 		C22BB39D214A696C008B98CD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C22BB39C214A696C008B98CD /* Constants.swift */; };
+		C26C947C216377D1006108E2 /* Parsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C947B216377D1006108E2 /* Parsers.swift */; };
+		C26C94802163846D006108E2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C947F2163846D006108E2 /* APIManager.swift */; };
 		C26EF065216361EA00323FBD /* SenderMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EF064216361EA00323FBD /* SenderMedia.swift */; };
 		C26EF0672163650000323FBD /* Date EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EF0662163650000323FBD /* Date EXT.swift */; };
 /* End PBXBuildFile section */
@@ -37,9 +39,11 @@
 		C22BB38D214A4B32008B98CD /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
 		C22BB391214A4C03008B98CD /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		C22BB396214A5988008B98CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		C22BB398214A5B47008B98CD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		C22BB398214A5B47008B98CD /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		C22BB39A214A5C7E008B98CD /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		C22BB39C214A696C008B98CD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C26C947B216377D1006108E2 /* Parsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsers.swift; sourceTree = "<group>"; };
+		C26C947F2163846D006108E2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		C26EF064216361EA00323FBD /* SenderMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderMedia.swift; sourceTree = "<group>"; };
 		C26EF0662163650000323FBD /* Date EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date EXT.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,14 +112,24 @@
 		C22BB39E214A6D54008B98CD /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C26C947A2163779B006108E2 /* Network */,
 				C22BB39C214A696C008B98CD /* Constants.swift */,
 				C22BB38D214A4B32008B98CD /* Credential.swift */,
-				C22BB398214A5B47008B98CD /* APIManager.swift */,
 				C2299DB021511CC500AB6CB5 /* MediaFactory.swift */,
 				C26EF064216361EA00323FBD /* SenderMedia.swift */,
 				C26EF0662163650000323FBD /* Date EXT.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C26C947A2163779B006108E2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C22BB398214A5B47008B98CD /* QueryService.swift */,
+				C26C947B216377D1006108E2 /* Parsers.swift */,
+				C26C947F2163846D006108E2 /* APIManager.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,13 +203,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26C947C216377D1006108E2 /* Parsers.swift in Sources */,
 				C22BB397214A5988008B98CD /* User.swift in Sources */,
 				C26EF065216361EA00323FBD /* SenderMedia.swift in Sources */,
 				C22BB39B214A5C7E008B98CD /* MainVC.swift in Sources */,
 				C2299DB5215123BF00AB6CB5 /* Tag.swift in Sources */,
 				C26EF0672163650000323FBD /* Date EXT.swift in Sources */,
+				C26C94802163846D006108E2 /* APIManager.swift in Sources */,
 				C22BB38E214A4B32008B98CD /* Credential.swift in Sources */,
-				C22BB399214A5B47008B98CD /* APIManager.swift in Sources */,
+				C22BB399214A5B47008B98CD /* QueryService.swift in Sources */,
 				C2299DB121511CC500AB6CB5 /* MediaFactory.swift in Sources */,
 				C22BB39D214A696C008B98CD /* Constants.swift in Sources */,
 				C22BB37C214A47FF008B98CD /* AppDelegate.swift in Sources */,
