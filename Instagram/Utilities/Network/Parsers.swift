@@ -14,7 +14,7 @@ protocol ParserProtocol {
 	func parseJSON(_ json: [String : Any], completion: @escaping QueryResult)
 }
 
-private class UserParser: ParserProtocol {
+class UserParser: ParserProtocol {
 	var errorMessage: String = ""
 	
 	func parseJSON(_ json: [String : Any], completion: @escaping UserParser.QueryResult) {
