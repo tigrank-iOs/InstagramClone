@@ -14,10 +14,11 @@ protocol CredentialProtocol {
 }
 
 public class Credential: CredentialProtocol {
-	public static let shared = Credential()
 	
+	public static let shared = Credential()
 	private init() { }
 	
+	// Хранит состояние авторизации текущего пользователя
 	static var userIsAuthorized: Bool {
 		if token != nil {
 			return true
@@ -25,6 +26,7 @@ public class Credential: CredentialProtocol {
 		return false
 	}
 	
+	// Получаем и сохраняем токен из/в UserDefaults
 	static var token: String? {
 		get {
 			return UserDefaults.standard.value(forKey: "token") as? String

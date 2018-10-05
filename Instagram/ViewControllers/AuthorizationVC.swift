@@ -27,6 +27,7 @@ public class AuthorizationVC: UIViewController {
 }
 
 extension AuthorizationVC: UIWebViewDelegate {
+	
 	// MARK: - UIWebViewDelegate
 	public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
 		if let url = request.url?.absoluteString {
