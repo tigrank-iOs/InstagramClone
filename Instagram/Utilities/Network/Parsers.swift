@@ -62,7 +62,7 @@ class TagParser: ParserProtocol {
 			}
 			completion(tagsArray, errorMessage)
 		} else {
-			errorMessage += "Result for Media format doesn`t match required struct"
+			errorMessage += "Result for Tag format doesn`t match required struct"
 			completion(nil, errorMessage)
 		}
 	}

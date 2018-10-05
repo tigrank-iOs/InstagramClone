@@ -13,11 +13,17 @@ class MainVC: UIViewController {
 	@IBOutlet weak var userNameLabel: UILabel!
 	
 	// MARK: - Variables
+	var userManager: UserManager? {
+		didSet {
+			self.userNameLabel.text = userManager!.getUserName()
+		}
+	}
+	
 	var user: User? {
 		didSet {
 			guard user != nil else { return }
 			DispatchQueue.main.async {
-				self.userNameLabel.text = self.user?.userName
+				self.userManager = UserManager(self.user!)
 			}
 		}
 	}

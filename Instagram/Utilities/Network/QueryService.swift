@@ -29,7 +29,12 @@ class QueryService {
 		DispatchQueue.main.async {
 			UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		}
-		URLSession.shared.dataTask(with: URL(string: url)!) { [weak self] (data, response, error) in
+		guard let url = URL(string: url) else {
+			self.errorMessage += "Error: bad URL received"
+			completion(nil, self.errorMessage)
+			return
+		}
+		URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
 			guard let strongSelf = self else { return }
 			guard let data = data, error == nil else {
 				strongSelf.errorMessage += "Data task error: \(error!.localizedDescription)\n"
@@ -48,12 +53,34 @@ class QueryService {
 	
 	// Унифицированный метод для получения JSON из сети и парсинга в нужный тип файла
 	public func get(entity type: EntityTypes, for_lattitude lattitude: String?, longtitude: String?, name: String?, tag: Tag?, _ completion: @escaping QueryResults) {
+		
+		let url = createURL(type, lattitude, longtitude, tag, name)
+		
+		self.load(url) { [weak self] (json, error) in
+			guard let weakSelf = self else { return }
+			
+			guard let json = json as? [String : Any] else {
+				weakSelf.errorMessage += "Wrong JSON received"
+				completion(nil, weakSelf.errorMessage)
+				return
+			}
+			
+			weakSelf.assignParser(for: type)
+			
+			weakSelf.parser.parseJSON(json, completion: { (entities, error) in
+				weakSelf.errorMessage += error
+				completion(entities, error)
+			})
+		}
+	}
+	
+	// Метод создает URL по заданным параметрам
+	private func createURL(_ type: EntityTypes, _ lattitude: String?, _ longtitude: String?, _ tag: Tag?, _ name: String?) -> String {
 		guard let token = Credential.token else {
 			errorMessage += "Cannot get token"
-			completion(nil, errorMessage)
-			return
+			return errorMessage
 		}
-		var url: String = ""
+		var url = ""
 		switch type {
 		case .user:
 			url = Constants.UserAPI.host + Constants.UserAPI.currentUserBody + Constants.UserAPI.token + token
@@ -68,30 +95,19 @@ class QueryService {
 		case .tag:
 			guard let name = name else {
 				errorMessage += "No name for tag"
-				completion(nil, errorMessage)
-				return
+				return errorMessage
 			}
 			url = Constants.TagAPI.host + Constants.TagAPI.searchTagBody + Constants.TagAPI.tag + name + Constants.TagAPI.token + token
 		}
-		
-		self.load(url) { [weak self] (json, error) in
-			guard let weakSelf = self else { return }
-			guard let json = json as? [String : Any] else {
-				weakSelf.errorMessage += "Wrong JSON received"
-				completion(nil, weakSelf.errorMessage)
-				return
-			}
-			
-			switch type {
-			case .user: weakSelf.parser = UserParser()
-			case .media: weakSelf.parser = MediaParser()
-			case .tag: weakSelf.parser = TagParser()
-			}
-			
-			weakSelf.parser.parseJSON(json, completion: { (entities, error) in
-				weakSelf.errorMessage += error
-				completion(entities, error)
-			})
+		return url
+	}
+	
+	// Метод назначает свойству parser необходимо занчение исходя из типа данных
+	private func assignParser(for type: EntityTypes) {
+		switch type {
+		case .user: self.parser = UserParser()
+		case .media: self.parser = MediaParser()
+		case .tag: self.parser = TagParser()
 		}
 	}
 }

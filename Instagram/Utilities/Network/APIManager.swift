@@ -36,29 +36,13 @@ public class APIManager {
 			self.getUser { (user) in
 				if let user = user {
 					self.user = user
-					QueryService.shared.get(entity: .media, for_lattitude: nil, longtitude: nil, name: nil, tag: nil, { (media, error) in
-						if let media = media as? [MediaProtocol] {
-							completion(media)
-						}
-						if !(error.isEmpty) {
-							print(error)
-							completion(nil)
-						}
-					})
+					self.makeMediaQuery(completion, for_lattitude: nil, longtitude: nil, name: nil, tag: nil)
 				} else {
 					completion(nil)
 				}
 			}
 		} else {
-			QueryService.shared.get(entity: .media, for_lattitude: nil, longtitude: nil, name: nil, tag: nil, { (media, error) in
-				if let media = media as? [MediaProtocol] {
-					completion(media)
-				}
-				if !(error.isEmpty) {
-					print(error)
-					completion(nil)
-				}
-			})
+			self.makeMediaQuery(completion, for_lattitude: nil, longtitude: nil, name: nil, tag: nil)
 		}
 	}
 	
@@ -67,29 +51,13 @@ public class APIManager {
 			self.getUser { (user) in
 				if let user = user {
 					self.user = user
-					QueryService.shared.get(entity: .media, for_lattitude: lattitude, longtitude: longtitude, name: nil, tag: nil, { (media, error) in
-						if let media = media as? [MediaProtocol] {
-							completion(media)
-						}
-						if !(error.isEmpty) {
-							print(error)
-							completion(nil)
-						}
-					})
+					self.makeMediaQuery(completion, for_lattitude: lattitude, longtitude: longtitude, name: nil, tag: nil)
 				} else {
 					completion(nil)
 				}
 			}
 		} else {
-			QueryService.shared.get(entity: .media, for_lattitude: nil, longtitude: nil, name: nil, tag: nil, { (media, error) in
-				if let media = media as? [MediaProtocol] {
-					completion(media)
-				}
-				if !(error.isEmpty) {
-					print(error)
-					completion(nil)
-				}
-			})
+			self.makeMediaQuery(completion, for_lattitude: lattitude, longtitude: longtitude, name: nil, tag: nil)
 		}
 	}
 	
@@ -98,29 +66,13 @@ public class APIManager {
 			self.getUser { (user) in
 				if let user = user {
 					self.user = user
-					QueryService.shared.get(entity: .media, for_lattitude: nil, longtitude: nil, name: nil, tag: tag, { (media, error) in
-						if let media = media as? [MediaProtocol] {
-							completion(media)
-						}
-						if !(error.isEmpty) {
-							print(error)
-							completion(nil)
-						}
-					})
+					self.makeMediaQuery(completion, for_lattitude: nil, longtitude: nil, name: nil, tag: tag)
 				} else {
 					completion(nil)
 				}
 			}
 		} else {
-			QueryService.shared.get(entity: .media, for_lattitude: nil, longtitude: nil, name: nil, tag: tag, { (media, error) in
-				if let media = media as? [MediaProtocol] {
-					completion(media)
-				}
-				if !(error.isEmpty) {
-					print(error)
-					completion(nil)
-				}
-			})
+			self.makeMediaQuery(completion, for_lattitude: nil, longtitude: nil, name: nil, tag: tag)
 		}
 	}
 	
@@ -134,5 +86,17 @@ public class APIManager {
 				completion(nil)
 			}
 		}
+	}
+	
+	private func makeMediaQuery(_ completion: @escaping MediaQueryResults, for_lattitude lattitude: String?, longtitude: String?, name: String?, tag: Tag?) {
+		QueryService.shared.get(entity: .media, for_lattitude: lattitude, longtitude: longtitude, name: name, tag: tag, { (media, error) in
+			if let media = media as? [MediaProtocol] {
+				completion(media)
+			}
+			if !(error.isEmpty) {
+				print(error)
+				completion(nil)
+			}
+		})
 	}
 }
