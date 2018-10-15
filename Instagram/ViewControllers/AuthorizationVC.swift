@@ -17,12 +17,20 @@ public class AuthorizationVC: UIViewController {
 	// MARK: - VCLifeCycle
 	override public func viewDidLoad() {
         super.viewDidLoad()
+		removeCookies()
 		
 		webView.delegate = self
 		
 		let request = URLRequest(url: Constants.Auth.url)
 		webView.loadRequest(request)
     }
+	
+	private func removeCookies() {
+		let storage = HTTPCookieStorage.shared
+		for cookie in storage.cookies! {
+			storage.deleteCookie(cookie)
+		}
+	}
 
 }
 
@@ -34,7 +42,7 @@ extension AuthorizationVC: UIWebViewDelegate {
 			if url.range(of: "#access_token") != nil {
 				let token = url.components(separatedBy: "#access_token=").last!
 				Credential.token = token
-				presentMainVC()
+				AuthorizationService().login()
 			}
 		}
 		return true

@@ -15,7 +15,7 @@ public enum MediaTypes {
 public protocol MediaProtocol {
 	var id: String { get }
 	var user: SenderMedia { get }
-	var images: [String : Photo]? { get }
+	var images: [String : Photo] { get }
 	var caption: Caption? { get }
 	var userHasLiked: Bool { get }
 	var likes: Int { get }
@@ -31,7 +31,7 @@ public protocol MediaProtocol {
 public class Image: MediaProtocol {
 	public var id: String
 	public var user: SenderMedia
-	public var images: [String : Photo]?
+	public var images: [String : Photo] = [:]
 	public var caption: Caption?
 	public var userHasLiked: Bool
 	public var likes: Int
@@ -48,7 +48,7 @@ public class Image: MediaProtocol {
 		let user = User(response: response["user"] as! [String : Any])
 		self.user = SenderMedia(user)
 		for data in response["images"] as! [String : Any] {
-			images?[data.key] = Photo(data: data.value as! [String : Any])
+			images[data.key] = Photo(data: data.value as! [String : Any])
 		}
 		caption = Caption(data: response["caption"] as! [String : Any])
 		userHasLiked = response["user_has_liked"] as! Bool
@@ -65,7 +65,7 @@ public class Image: MediaProtocol {
 public class Video: MediaProtocol {
 	public var id: String
 	public var user: SenderMedia
-	public var images: [String : Photo]?
+	public var images: [String : Photo] = [:]
 	public var caption: Caption?
 	public var userHasLiked: Bool
 	public var likes: Int
@@ -77,14 +77,14 @@ public class Video: MediaProtocol {
 	public var location: [String : Any]?
 	public var usersInPhoto: [[String? : Any?]]
 	
-	public var videos: [String : VideoModel]?
+	public var videos: [String : VideoModel] = [:]
 	
 	init(response: [String : Any]) {
 		id = response["id"] as! String
 		let user = User(response: response["user"] as! [String : Any])
 		self.user = SenderMedia(user)
 		for data in response["images"] as! [String : Any] {
-			images?[data.key] = Photo(data: data.value as! [String : Any])
+			images[data.key] = Photo(data: data.value as! [String : Any])
 		}
 		caption = Caption(data: response["caption"] as! [String : Any])
 		userHasLiked = response["user_has_liked"] as! Bool
@@ -97,7 +97,7 @@ public class Video: MediaProtocol {
 		usersInPhoto = response["users_in_photo"] as! [[String : Any]]
 		
 		for data in response["videos"] as! [String : Any] {
-			videos?[data.key] = VideoModel(data: data.value as! [String : Any])
+			videos[data.key] = VideoModel(data: data.value as! [String : Any])
 		}
 	}
 }

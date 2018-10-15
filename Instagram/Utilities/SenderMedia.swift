@@ -24,6 +24,10 @@ public class SenderMedia: UserMedia {
 		return self.owner.userName
 	}
 	
+	public var fullName: String {
+		return self.owner.fullName
+	}
+	
 	public var pictureUrl: String {
 		return self.owner.profilePictureURL
 	}

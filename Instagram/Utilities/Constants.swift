@@ -23,6 +23,7 @@ public class Constants {
 	struct Storyboard {
 		static public let authVCId = "Authorization"
 		static public let mainVCId = "Main"
+		static public let mediaCellId = "MediaCell"
 	}
 	
 	// Структура, содержащая необходимые константы для осуществления запроса информации о текущем пользователе
