@@ -24,6 +24,7 @@ class MainVC: UIViewController {
 	@IBOutlet weak var bioLabel: UILabel!
 	@IBOutlet weak var websiteLabel: UILabel!
 	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var searchBar: UISearchBar!
 	
 	
 	// MARK: - Variables
@@ -43,14 +44,22 @@ class MainVC: UIViewController {
 	}
 	
 	private var media: [MediaProtocol] = []
+	private var tagView: SearchedTagsView!
 	
 	// MARK: - VCLifeCycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
+		searchBar.delegate = self
 		loadUser()
 		loadMedia()
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(received(_:)), name: .init(rawValue: Constants.NotificationsName.tagSelected), object: nil)
+		
+		let hideTagViewGesture = UITapGestureRecognizer(target: self, action: #selector(hideTagView))
+		hideTagViewGesture.cancelsTouchesInView = false
+		self.navigationController?.navigationBar.addGestureRecognizer(hideTagViewGesture)
 	}
 	
 	// MARK: - Functions
@@ -85,6 +94,21 @@ class MainVC: UIViewController {
 		}
 	}
 	
+	@objc private func received(_ notification: Notification) {
+		guard let tag = notification.object as? Tag else {
+			return
+		}
+		let tagMediaVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constants.Storyboard.tagMediaVCId) as! TagMediaTableVC
+		tagMediaVC.tag = tag
+		self.navigationController?.pushViewController(tagMediaVC, animated: true)
+	}
+	
+	@objc private func hideTagView() {
+		self.searchBar.resignFirstResponder()
+		searchBar.text = ""
+		tagView.removeFromSuperview()
+	}
+	
 	// MARK: - Actions
 	@IBAction func logoutButtonTapped(_ sender: UIBarButtonItem) {
 		AuthorizationService().logout()
@@ -102,5 +126,23 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.mediaCellId, for: indexPath) as! MediaCell
 		cell.setupCell(with: media[indexPath.row])
 		return cell
+	}
+}
+
+extension MainVC: UISearchBarDelegate {
+	
+	// MARK: - UISearchBarDelegate
+	func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+		tagView = SearchedTagsView(frame: self.tableView.frame)
+		self.view.addSubview(tagView)
+		return true
+	}
+	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		NotificationCenter.default.post(name: .init(Constants.NotificationsName.textReceived), object: searchText)
+	}
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		self.hideTagView()
 	}
 }

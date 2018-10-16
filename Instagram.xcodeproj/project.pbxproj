@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		917368D69DAB5F778FD2D7DC /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3B4149F13B8942BEEB75604 /* Pods_Instagram.framework */; };
+		C20F5B052175E3CA0077536C /* SearchedTagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F5B042175E3CA0077536C /* SearchedTagsView.swift */; };
+		C20F5B092175E5EB0077536C /* TagMediaTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20F5B082175E5EB0077536C /* TagMediaTableVC.swift */; };
 		C2299DAF2151091400AB6CB5 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2299DAE2151091400AB6CB5 /* Media.swift */; };
 		C2299DB121511CC500AB6CB5 /* MediaFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2299DB021511CC500AB6CB5 /* MediaFactory.swift */; };
 		C2299DB5215123BF00AB6CB5 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2299DB4215123BF00AB6CB5 /* Tag.swift */; };
@@ -36,6 +38,8 @@
 		2A36EE316E5A08686042412E /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 		91852415737FA9C02B0874CC /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Pods/Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
 		B3B4149F13B8942BEEB75604 /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C20F5B042175E3CA0077536C /* SearchedTagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedTagsView.swift; sourceTree = "<group>"; };
+		C20F5B082175E5EB0077536C /* TagMediaTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMediaTableVC.swift; sourceTree = "<group>"; };
 		C2299DAE2151091400AB6CB5 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		C2299DB021511CC500AB6CB5 /* MediaFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaFactory.swift; sourceTree = "<group>"; };
 		C2299DB4215123BF00AB6CB5 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 			children = (
 				C22BB391214A4C03008B98CD /* AuthorizationVC.swift */,
 				C22BB39A214A5C7E008B98CD /* MainVC.swift */,
+				C20F5B082175E5EB0077536C /* TagMediaTableVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -139,7 +144,6 @@
 				C2B18A4D216E246C00C65A2D /* Extensions */,
 				C2B18A51216E2E1B00C65A2D /* Factories */,
 				C26C947A2163779B006108E2 /* Network */,
-				C22BB39C214A696C008B98CD /* Constants.swift */,
 				C26EF064216361EA00323FBD /* SenderMedia.swift */,
 				C26C948121675140006108E2 /* UserManager.swift */,
 			);
@@ -170,6 +174,7 @@
 		C2B18A42216DEC9300C65A2D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C22BB39C214A696C008B98CD /* Constants.swift */,
 				C22BB382214A4802008B98CD /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -179,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				C2B18A44216E05A300C65A2D /* MediaCell.swift */,
+				C20F5B042175E3CA0077536C /* SearchedTagsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 				C22BB39B214A5C7E008B98CD /* MainVC.swift in Sources */,
 				C2299DB5215123BF00AB6CB5 /* Tag.swift in Sources */,
 				C2B18A57216E2FAC00C65A2D /* AuthorizationService.swift in Sources */,
+				C20F5B092175E5EB0077536C /* TagMediaTableVC.swift in Sources */,
 				C26EF0672163650000323FBD /* Date EXT.swift in Sources */,
 				C26C94802163846D006108E2 /* APIManager.swift in Sources */,
 				C22BB38E214A4B32008B98CD /* Credential.swift in Sources */,
@@ -349,6 +356,7 @@
 				C22BB39D214A696C008B98CD /* Constants.swift in Sources */,
 				C22BB37C214A47FF008B98CD /* AppDelegate.swift in Sources */,
 				C2299DAF2151091400AB6CB5 /* Media.swift in Sources */,
+				C20F5B052175E3CA0077536C /* SearchedTagsView.swift in Sources */,
 				C22BB392214A4C03008B98CD /* AuthorizationVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

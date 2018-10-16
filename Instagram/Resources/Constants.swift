@@ -23,7 +23,9 @@ public class Constants {
 	struct Storyboard {
 		static public let authVCId = "Authorization"
 		static public let mainVCId = "Main"
+		static public let tagMediaVCId = "SearchedTagMedia"
 		static public let mediaCellId = "MediaCell"
+		static public let tagCellId = "TagCell"
 	}
 	
 	// Структура, содержащая необходимые константы для осуществления запроса информации о текущем пользователе
@@ -52,5 +54,11 @@ public class Constants {
 		static public let media = "/media/recent"
 		static public let token = "&access_token="
 		static public let mediaToken = "?access_token="
+	}
+	
+	// Структура, содержащая наименования ноттификаций
+	struct NotificationsName {
+		static public let tagSelected = "SelectSearchedTag"
+		static public let textReceived = "SearchTextReceived"
 	}
 }
