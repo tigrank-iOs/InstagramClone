@@ -36,7 +36,7 @@ public class Constants {
 		static public let token = "?access_token="
 	}
 	
-	// Структура, содержащая необходимые константы для осуществления поиска медиа в заданой местности
+	// Структура, содержащая необходимые константы для запросов по медиа
 	struct MediaAPI {
 		static public let host = "https:api.instagram.com/v1/"
 		static public let body = "media/search?"
@@ -45,7 +45,7 @@ public class Constants {
 		static public let token = "&access_token="
 	}
 	
-	// Структура, содержащая необходимые константы для осуществления запроса информации о текущем пользователе
+	// Структура, содержащая необходимые константы для запросов по тегу
 	struct TagAPI {
 		static public let host = "https:api.instagram.com/v1/"
 		static public let searchTagBody = "tags/search"

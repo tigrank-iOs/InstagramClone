@@ -30,19 +30,11 @@ class MainVC: UIViewController {
 	// MARK: - Variables
 	private var userManager: UserManager? {
 		didSet {
-			self.presentUser()
-		}
-	}
-	
-	private var user: User? {
-		didSet {
-			guard user != nil else { return }
 			DispatchQueue.main.async {
-				self.userManager = UserManager(self.user!)
+				self.presentUser()
 			}
 		}
 	}
-	
 	private var media: [MediaProtocol] = []
 	private var tagView: SearchedTagsView!
 	
@@ -55,18 +47,26 @@ class MainVC: UIViewController {
 		loadUser()
 		loadMedia()
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(received(_:)), name: .init(rawValue: Constants.NotificationsName.tagSelected), object: nil)
-		
 		let hideTagViewGesture = UITapGestureRecognizer(target: self, action: #selector(hideTagView))
 		hideTagViewGesture.cancelsTouchesInView = false
 		self.navigationController?.navigationBar.addGestureRecognizer(hideTagViewGesture)
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		NotificationCenter.default.addObserver(self, selector: #selector(received(_:)), name: .init(rawValue: Constants.NotificationsName.tagSelected), object: nil)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: .init(rawValue: Constants.NotificationsName.tagSelected), object: nil)
 	}
 	
 	// MARK: - Functions
 	private func loadUser() {
 		APIManager.shared.getUser({ (user) in
 			if let user = user {
-				self.user = user
+				self.userManager = UserManager(user)
 			}
 		})
 	}
@@ -95,9 +95,7 @@ class MainVC: UIViewController {
 	}
 	
 	@objc private func received(_ notification: Notification) {
-		guard let tag = notification.object as? Tag else {
-			return
-		}
+		guard let tag = notification.object as? Tag else { return }
 		let tagMediaVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Constants.Storyboard.tagMediaVCId) as! TagMediaTableVC
 		tagMediaVC.tag = tag
 		self.navigationController?.pushViewController(tagMediaVC, animated: true)
@@ -124,8 +122,8 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.mediaCellId, for: indexPath) as! MediaCell
-		cell.setupCell(with: media[indexPath.row])
-		return cell
+		let cellSetuper = CellSetuper(with: cell, media: media[indexPath.row])
+		return cellSetuper.getCell()
 	}
 }
 
