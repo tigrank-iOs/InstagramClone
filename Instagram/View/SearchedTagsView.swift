@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchedTagsView: UIView {
+public class SearchedTagsView: UIView {
 	
 	var tableview: UITableView!
 	var tags: [Tag] = []
@@ -49,11 +49,11 @@ class SearchedTagsView: UIView {
 extension SearchedTagsView: UITableViewDelegate, UITableViewDataSource {
 	
 	// MARK: - UITableViewDataSource
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return tags.count
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.tagCellId, for: indexPath)
 		cell.textLabel?.text = "#" + tags[indexPath.row].name
 		cell.accessoryType = .disclosureIndicator
@@ -61,7 +61,7 @@ extension SearchedTagsView: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	// MARK: - UITableViewDelegate
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		NotificationCenter.default.post(name: .init(Constants.NotificationsName.tagSelected), object: tags[indexPath.row])
 		isHidden = true
 	}

@@ -23,6 +23,29 @@ class QueryService {
 	typealias QueryResults = (Any?, String) -> Void
 	
 	// MARK: - Functions
+	// Унифицированный метод для получения JSON из сети и парсинга в нужный тип файла
+	func get(entity type: EntityTypes, for_lattitude lattitude: String?, longtitude: String?, name: String?, tag: Tag?, _ completion: @escaping QueryResults) {
+		
+		let url = createURL(type, lattitude, longtitude, tag, name)
+		
+		self.load(url) { [weak self] (json, error) in
+			guard let weakSelf = self else { return }
+			
+			guard let json = json as? [String : Any] else {
+				weakSelf.errorMessage += "Wrong JSON received"
+				completion(nil, weakSelf.errorMessage)
+				return
+			}
+			
+			weakSelf.assignParser(for: type)
+			
+			weakSelf.parser.parseJSON(json, completion: { (entities, error) in
+				weakSelf.errorMessage += error
+				completion(entities, error)
+			})
+		}
+	}
+	
 	// Базовый метод для выполнения GET запросов в сеть
 	private func load(_ url: String, _ completion: @escaping QueryResults) {
 		self.errorMessage = ""
@@ -49,29 +72,6 @@ class QueryService {
 			}
 			completion(try? JSONSerialization.jsonObject(with: data, options: .mutableContainers), strongSelf.errorMessage)
 		}.resume()
-	}
-	
-	// Унифицированный метод для получения JSON из сети и парсинга в нужный тип файла
-	public func get(entity type: EntityTypes, for_lattitude lattitude: String?, longtitude: String?, name: String?, tag: Tag?, _ completion: @escaping QueryResults) {
-		
-		let url = createURL(type, lattitude, longtitude, tag, name)
-		
-		self.load(url) { [weak self] (json, error) in
-			guard let weakSelf = self else { return }
-			
-			guard let json = json as? [String : Any] else {
-				weakSelf.errorMessage += "Wrong JSON received"
-				completion(nil, weakSelf.errorMessage)
-				return
-			}
-			
-			weakSelf.assignParser(for: type)
-			
-			weakSelf.parser.parseJSON(json, completion: { (entities, error) in
-				weakSelf.errorMessage += error
-				completion(entities, error)
-			})
-		}
 	}
 	
 	// Метод создает URL по заданным параметрам
