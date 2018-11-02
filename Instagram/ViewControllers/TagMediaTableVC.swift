@@ -27,7 +27,7 @@ class TagMediaTableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Storyboard.mediaCellId, for: indexPath) as! MediaCell
-		let cellSetuper = CellSetuper(with: cell, media: media[indexPath.row])
+		let cellSetuper = CellBuilder(with: cell, media: media[indexPath.row])
 		return cellSetuper.getCell()
     }
 	

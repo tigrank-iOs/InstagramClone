@@ -1,5 +1,5 @@
 //
-//  CellSetuper.swift
+//  CellBuilder.swift
 //  Instagram
 //
 //  Created by Тигран on 22/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct CellSetuper {
+public struct CellBuilder {
 	
 	private var cell: MediaCell!
 	private var media: MediaProtocol!

@@ -28,7 +28,7 @@
 		C26C948221675140006108E2 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26C948121675140006108E2 /* UserManager.swift */; };
 		C26EF065216361EA00323FBD /* SenderMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EF064216361EA00323FBD /* SenderMedia.swift */; };
 		C26EF0672163650000323FBD /* Date EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C26EF0662163650000323FBD /* Date EXT.swift */; };
-		C29FE528217DCB3600E15652 /* CellSetuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29FE527217DCB3600E15652 /* CellSetuper.swift */; };
+		C29FE528217DCB3600E15652 /* CellBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C29FE527217DCB3600E15652 /* CellBuilder.swift */; };
 		C2B18A45216E05A300C65A2D /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B18A44216E05A300C65A2D /* MediaCell.swift */; };
 		C2B18A53216E2E4400C65A2D /* AuthorizationCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B18A52216E2E4400C65A2D /* AuthorizationCommand.swift */; };
 		C2B18A55216E2EC000C65A2D /* UIApplication EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B18A54216E2EC000C65A2D /* UIApplication EXT.swift */; };
@@ -61,7 +61,7 @@
 		C26C948121675140006108E2 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		C26EF064216361EA00323FBD /* SenderMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderMedia.swift; sourceTree = "<group>"; };
 		C26EF0662163650000323FBD /* Date EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date EXT.swift"; sourceTree = "<group>"; };
-		C29FE527217DCB3600E15652 /* CellSetuper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSetuper.swift; sourceTree = "<group>"; };
+		C29FE527217DCB3600E15652 /* CellBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellBuilder.swift; sourceTree = "<group>"; };
 		C2B18A44216E05A300C65A2D /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
 		C2B18A52216E2E4400C65A2D /* AuthorizationCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationCommand.swift; sourceTree = "<group>"; };
 		C2B18A54216E2EC000C65A2D /* UIApplication EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication EXT.swift"; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				C26C947A2163779B006108E2 /* Network */,
 				C26EF064216361EA00323FBD /* SenderMedia.swift */,
 				C26C948121675140006108E2 /* UserManager.swift */,
-				C29FE527217DCB3600E15652 /* CellSetuper.swift */,
+				C29FE527217DCB3600E15652 /* CellBuilder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 				C2299DB5215123BF00AB6CB5 /* Tag.swift in Sources */,
 				C2B18A57216E2FAC00C65A2D /* AuthorizationService.swift in Sources */,
 				C20F5B092175E5EB0077536C /* TagMediaTableVC.swift in Sources */,
-				C29FE528217DCB3600E15652 /* CellSetuper.swift in Sources */,
+				C29FE528217DCB3600E15652 /* CellBuilder.swift in Sources */,
 				C26EF0672163650000323FBD /* Date EXT.swift in Sources */,
 				C26C94802163846D006108E2 /* APIManager.swift in Sources */,
 				C22BB38E214A4B32008B98CD /* Credential.swift in Sources */,
